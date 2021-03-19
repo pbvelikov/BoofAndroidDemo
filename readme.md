@@ -21,6 +21,15 @@ dependencies {
         String a -> api group: 'org.boofcv', name: a, version: '0.36' }
 }
 ```
+For me the lines above give multiple duplicate class errors when building the project. I managed to solve this using these lines of code instead:
+```groovy
+ ['boofcv-android'].each {
+        String a -> api group: 'org.boofcv', name: a, version: '0.36'
+    }
+    implementation(group: 'org.boofcv', name: 'boofcv-core', version: '0.36') {
+        exclude(group: 'org.apache.commons')
+    }
+```
 
 # Help Wanted!
 
